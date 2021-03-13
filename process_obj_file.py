@@ -5,8 +5,9 @@
 """
 
 
-def load_obj_file(path):
-    """Load obj file
+def load_obj_file(path: str):
+    """
+    Load obj file
     load the .obj format mesh file with square or triangle faces
     return the vertices list and faces list
     """
@@ -42,10 +43,11 @@ def load_obj_file(path):
 
 
 def write_obj_file(file_name_path: str, vertices: list, faces: list):
-    """write the obj file to the specific path
-       file_name_path: path to write the obj file
-       vertices: list
-       faces: 面 list
+    """
+    write the obj file to the specific path
+    file_name_path: path to write the obj file
+    vertices: list
+    faces:  list
     """
     with open(file_name_path, 'w') as f:
         for v in vertices:
