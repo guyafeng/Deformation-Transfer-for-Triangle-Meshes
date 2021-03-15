@@ -9,35 +9,7 @@ import numpy as np
 import copy
 
 
-def add_extra_normal_vertex_for_triangle(vertices: list, faces: list):
-    """
-    add the fourth vertex for each triangle face, we call the fourth vertex as the "normal-vertex"
-    we need to use the four vertices of one triangle face to calculate the deformation gradient of target mesh.
-    Here we follow the methodology that described in the sumner's thesis:
-    "Mesh Modification Using Deformation Gradients", Chapter 3.
-    :param vertices:mesh模型的顶点列表
-    :param faces:mesh模型的三角面
-    :return:v_new, f_new 新的顶点和三角面列表
-    """
-    # 深拷贝创建新的对象，防止对原有变量引用做修改
-    v_new = copy.deepcopy(vertices)
-    f_new = copy.deepcopy(faces)
-    # 注意face中的vertex序号是1开始的
-    for face in f_new:
-        v0_id, v1_id, v2_id = face
-        v0, v1, v2 = np.array(vertices[v0_id - 1], dtype=np.float), np.array(vertices[v1_id - 1], dtype=np.float), np.array(vertices[v2_id - 1], dtype=np.float)
-        e1 = v1 - v0
-        e2 = v2 - v0
-        normal = np.cross(e1, e2) / np.linalg.norm(np.cross(e1, e2))
-        vn = v0 + normal
-        vn_list_form = vn.tolist()
-        # append the new normal vertex directly
-        v_new.append(vn_list_form)
-        # 获取新插入顶点的序号，不用减去1
-        vn_idx = len(v_new)
-        # 将新序号，插入f_new的对应的face中
-        face.append(vn_idx)
-    return v_new, f_new
+
 
 
 def construct_mat_a(vts: list, faces: list) -> sps.csc_matrix:
@@ -151,3 +123,9 @@ def construct_mat_c(src_ref_vts_with_nm: list, src_def_vts_with_nm: list,
     mat_c = np.concatenate(transpose_affine_list, axis=0)
     sps_mat_c = sps.csc_matrix(mat_c)
     return sps_mat_c
+
+
+
+
+
+

@@ -6,18 +6,28 @@
 import argparse
 
 
-def get_config_parser():
+def get_correspondence_solver_config_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--num_k_1', type=int, default='./pretrained', help='directory for all savings')
-    parser.add_argument('--threshold_distance_1', type=float, default='cuda:0', help='cuda device number, eg:[cuda:0]')
-    parser.add_argument('--num_k_2', type=int, default='./pretrained', help='directory for all savings')
-    parser.add_argument('--threshold_distance_2', type=float, default='cuda:0', help='cuda device number, eg:[cuda:0]')
+    parser.add_argument('--start_point', type=str, default='phase_2')
+    parser.add_argument('--src_ref_obj', type=str, default='./data/face-poses/face-reference.obj')
+    parser.add_argument('--dst_ref_obj', type=str, default='./data/head-poses/head-reference.obj')
 
-    parser.add_argument('--', type=int, default=3, help='number of layers')
-    parser.add_argument('--learning_rate', type=float, default=2e-4, help='learning rate')
+    parser.add_argument('--src_marker_txt', type=str, default='./data/marker_txt_files/face_marker2.txt')
+    parser.add_argument('--dst_marker_txt', type=str, default='./data/marker_txt_files/head_marker2.txt')
+
+    parser.add_argument('--result_save_dir', type=str, default='./data/registration_result')
+    parser.add_argument('--ph1_res_name', type=str, default='face_phase1_result.obj')
+    parser.add_argument('--ph2_res_name', type=str, default='face_phase2_result.obj')
+
+    parser.add_argument('--num_k', type=int, default=50)
+    parser.add_argument('--thresh_dist', type=float, default=1.0)
+
+    parser.add_argument('--ws', type=float, default=1.0)
+    parser.add_argument('--wi', type=float, default=0.001)
+    parser.add_argument('--wc', nargs="+", type=list, default=[1.0, 25.0, 45.0])
     return parser
 
 
-def get_args():
-    cfg_parser = get_config_parser()
+def get_correspondence_solver_args():
+    cfg_parser = get_correspondence_solver_config_parser()
     return cfg_parser.parse_args()
