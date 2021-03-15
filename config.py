@@ -6,7 +6,7 @@
 import argparse
 
 
-def get_correspondence_solver_config_parser():
+def get_registration_solver_config_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('--start_point', type=str, default='phase_2')
     parser.add_argument('--src_ref_obj', type=str, default='./data/face-poses/face-reference.obj')
@@ -28,6 +28,6 @@ def get_correspondence_solver_config_parser():
     return parser
 
 
-def get_correspondence_solver_args():
-    cfg_parser = get_correspondence_solver_config_parser()
+def get_registration_solver_args():
+    cfg_parser = get_registration_solver_config_parser()
     return cfg_parser.parse_args()

@@ -3,7 +3,7 @@
     :copyright: © 2020 Yalun Hu <allancodeman@163.com>
     :license: MIT, see LICENSE for more details.
 """
-from config import get_correspondence_solver_args
+from config import get_registration_solver_args
 from non_rigid_registration_solver import RegistrationSolver
 
 """
@@ -15,6 +15,6 @@ from non_rigid_registration_solver import RegistrationSolver
 """
 
 if __name__ == "__main__":
-    cfg = get_correspondence_solver_args()
+    cfg = get_registration_solver_args()
     solver = RegistrationSolver(cfg)
     solver.non_rigid_registration()
