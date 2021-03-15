@@ -5,6 +5,10 @@
 """
 import argparse
 
+'''
+Config parser of non-rigid registration solver
+'''
+
 
 def get_registration_solver_config_parser():
     parser = argparse.ArgumentParser()
@@ -31,3 +35,27 @@ def get_registration_solver_config_parser():
 def get_registration_solver_args():
     cfg_parser = get_registration_solver_config_parser()
     return cfg_parser.parse_args()
+
+
+'''
+Config parser of correspondence finder
+'''
+
+
+def get_correspondence_finder_config_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--src_reg_obj', type=str, default='./data/registration_result/face_phase2_result.obj')
+    parser.add_argument('--dst_ref_obj', type=str, default='./data/head-poses/head-reference.obj')
+
+    parser.add_argument('--num_k', type=int, default=50)
+    parser.add_argument('--thresh_dist', type=float, default=0.2)
+
+    parser.add_argument('--save_dir', type=str, default='./data/correspondence_result')
+    parser.add_argument('--save_name', type=str, default='face_head_correspondence.json')
+    return parser
+
+
+def correspondence_finder_args():
+    cfg_parser = get_correspondence_finder_config_parser()
+    return cfg_parser.parse_args()
+
