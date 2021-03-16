@@ -5,7 +5,6 @@
 """
 from scipy.spatial import KDTree
 import process_obj_file as p_obj
-import copy
 import numpy as np
 
 
