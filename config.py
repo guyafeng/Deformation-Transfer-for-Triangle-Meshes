@@ -55,7 +55,7 @@ def get_correspondence_finder_config_parser():
     return parser
 
 
-def correspondence_finder_args():
+def get_correspondence_finder_args():
     cfg_parser = get_correspondence_finder_config_parser()
     return cfg_parser.parse_args()
 
