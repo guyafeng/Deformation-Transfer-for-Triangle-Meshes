@@ -17,10 +17,10 @@ optimization problem.
 
 #### Demo
 ##### Results of Non-rigid registration
-![non-rigid registration](https://images.algorithmic.cn/GitHub/images/deformation_transfer_demo1.png)
+![non-rigid registration](https://images.algorithmic.cn/GitHub/images/deformation_transfer_demo1.jpg)
 
 ##### Results of Deformation transfer
-![deformation transfer](https://images.algorithmic.cn/GitHub/images/deformation_transfer_demo2.png)
+![deformation transfer](https://images.algorithmic.cn/GitHub/images/deformation_transfer_demo2.jpg)
 The topology of source & target mesh is different with each other.
 
 
