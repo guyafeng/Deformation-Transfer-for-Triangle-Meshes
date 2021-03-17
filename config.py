@@ -69,7 +69,7 @@ def get_deformation_transfer_solver_config_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('--src_ref_obj', type=str, default='./data/face-poses/face-reference.obj')
     parser.add_argument('--dst_ref_obj', type=str, default='./data/head-poses/head-reference.obj')
-    parser.add_argument('--src_def_obj', type=str, default='./data/face-poses/face-03-fury.obj')
+    parser.add_argument('--src_def_obj', type=str, default='./data/face-poses/face-02-cry.obj')
     # if has multiple deformed source mesh to transfer
     parser.add_argument('--src_def_objs_dir', type=str, default='./data/face-poses')
     # path to correspondence json file

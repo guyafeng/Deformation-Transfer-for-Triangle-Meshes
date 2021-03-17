@@ -20,17 +20,35 @@ optimization problem.
 ![non-rigid registration](https://images.algorithmic.cn/GitHub/images/deformation_transfer_demo1.png)
 
 ##### Results of Deformation transfer
+![deformation transfer](https://images.algorithmic.cn/GitHub/images/deformation_transfer_demo2.png)
+The topology of source & target mesh is different with each other.
 
 
 ##### Time consuming
-non-rigid registration stage: about 20 minutes! Though it's pretty slow, we only need to calculate it for once.
+- non-rigid registration stage: about 20 minutes! Though it's pretty slow, we only need to calculate it for once if we
+have a new pair of source/target mesh.
 
-correspondence finding: about 1~2 minutes.
+- correspondence finding: about 1 minute.
 
-deformation transfer: few seconds.
+- deformation transfer: few seconds.
 
 The speed of LU factorization seems has inversely proportional relationship with the number of vertices of mesh.
 So, use mesh has lower vertices and triangle faces might be faster.
+
+#### Things that REALLY should be NOTICED!
+The [obj data file released by the author Dr. R.W. Sumner](http://people.csail.mit.edu/sumner/research/deftransfer/data.html)
+has some mistakes in "face-poses". The order of vertices of reference mesh and some deformed mesh are different!!!
+e.g. face-01-anger.obj, face-03-fury.obj. As far as I know, only the order of face-02-cry.obj has the same order of
+vertices as face-reference.obj. So only transfer the deformation of face-02-cry.obj could obtain a correct result while
+using my code.
+
+![wrong vertices order](https://images.algorithmic.cn/GitHub/images/deformation_transfer_wrong_vts_order.png)
+
+I'm think the order of face-reference.obj and other deformed face-xx-xxx.obj might be the same, follow this you could still obtain
+correct deformation transfer results if made some modification based on my code.
+
+In my other tests, if the vertices order of reference and deformed source mesh can be guaranteed, the results are always
+good!
 
 
 #### Reference
