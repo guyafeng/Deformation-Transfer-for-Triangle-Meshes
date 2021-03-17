@@ -19,4 +19,20 @@ optimization problem.
 ##### Results of Non-rigid registration
 ![non-rigid registration](https://images.algorithmic.cn/GitHub/images/deformation_transfer_demo1.png)
 
-keep updating...
+##### Results of Deformation transfer
+
+
+##### Time consuming
+non-rigid registration stage: about 20 minutes! Though it's pretty slow, we only need to calculate it for once.
+
+correspondence finding: about 1~2 minutes.
+
+deformation transfer: few seconds.
+
+The speed of LU factorization seems has inversely proportional relationship with the number of vertices of mesh.
+So, use mesh has lower vertices and triangle faces might be faster.
+
+
+#### Reference
+- [1] [Deformation Transfer for Triangle Meshes: R.W. Sumner etal.](https://dl.acm.org/doi/abs/10.1145/1015706.1015736)
+- [2] [Mesh Modification Using Deformation Gradients: R.W. Sumner](https://dspace.mit.edu/handle/1721.1/34025)
