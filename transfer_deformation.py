@@ -9,7 +9,9 @@ import process_obj_file as p_obj
 import os
 
 """
-    This script shows a demo that how to execute the deformation transfer algorithm
+    This script shows a demo that how to execute the deformation transfer algorithm.
+    If you want to transfer a sequence of source mesh's deformation, you'd better use 
+    multiprocessing to accelerate the algorithm.
 """
 
 if __name__ == "__main__":
