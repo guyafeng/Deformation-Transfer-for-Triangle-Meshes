@@ -44,8 +44,8 @@ using my code.
 
 ![wrong vertices order](https://images.algorithmic.cn/GitHub/images/deformation_transfer_wrong_vts_order.png)
 
-I'm think the order of face-reference.obj and other deformed face-xx-xxx.obj might be the same, follow this you could still obtain
-correct deformation transfer results if made some modification based on my code.
+I think the order of triangle faces of the face-reference.obj and other deformed face-xx-xxx.obj might be the same, 
+follow this you could still obtain correct deformation transfer results if made some modification based on my code.
 
 In my other tests, if the vertices order of reference and deformed source mesh can be guaranteed, the results are always
 good!
