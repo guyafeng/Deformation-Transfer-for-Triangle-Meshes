@@ -38,6 +38,7 @@ class BasicDeformationTransferSolver(ABC):
         self.mat_a_not_crspd: sps.csc_matrix = None  # won't be changed easily as well
         self.mat_c_not_crspd: sps.csc_matrix = None
         self.solver_left_mat: sps.csc_matrix = None  # only correspond with matrix A, won't be changed easily
+        self.inv_left_mat: sps.csc_matrix = None
 
         '''
         Attributes that needed to be updated frequently
@@ -46,10 +47,9 @@ class BasicDeformationTransferSolver(ABC):
         # deformed vertices of source mesh
         self.src_def_vts: list = None  #
         self.src_def_vts_with_nm: list = None
-        self.solver_right_mat: sps.csc_matrix = None  # correspond with the deformation of source mesh
 
     @abstractmethod
-    def build_problem(self, src_def_vts: list):
+    def build_problem(self, src_def_vts: list) -> sps.csc_matrix:
         """
         Build the linear-optimization problem, since in the paper, the deformation transfer is equivalent to a
         linear-optimization problem.
@@ -57,7 +57,7 @@ class BasicDeformationTransferSolver(ABC):
         pass
 
     @abstractmethod
-    def solve_problem(self) -> list:
+    def solve_problem(self, solver_right_mat: sps.csc_matrix) -> list:
         """
         Solve the linear-optimization problem with LU factorization
         """

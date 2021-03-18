@@ -46,26 +46,25 @@ class DeformationTransferSolver(BasicDeformationTransferSolver):
             self.crspd_dst_faces = self.dst_faces
             self.mat_a_crspd = self.construct_matrix_a(mode='crspd')
             self.solver_left_mat = (self.mat_a_crspd.transpose()).dot(self.mat_a_crspd).tocsc()
+        self.inv_left_mat = splu(self.solver_left_mat)
         print("Init deformation transfer solver successfully!")
 
-    def build_problem(self, src_def_vts: list):
+    def build_problem(self, src_def_vts: list) -> sps.csc_matrix:
         self.src_def_vts = src_def_vts
         self.src_def_vts_with_nm, _ = \
             p_obj.add_extra_normal_vertex_for_triangle(self.src_def_vts, self.src_faces)
-
         mat_c_crspd = self.construct_matrix_c(mode='crspd')
         if not self.cfg.same_topology:
             tmp_right_mat = sps.vstack([mat_c_crspd, self.mat_c_not_crspd], format='csc')
             tmp_left_mat = sps.vstack([self.mat_a_crspd, self.mat_a_not_crspd], format='csc')
-            self.solver_right_mat = (tmp_left_mat.transpose()).dot(tmp_right_mat)
+            solver_right_mat = (tmp_left_mat.transpose()).dot(tmp_right_mat)
         else:
-            self.solver_right_mat = (self.mat_a_crspd.transpose()).dot(mat_c_crspd)
-        return
+            solver_right_mat = (self.mat_a_crspd.transpose()).dot(mat_c_crspd)
+        return solver_right_mat
 
-    def solve_problem(self) -> list:
-        inv_left_mat = splu(self.solver_left_mat)
-        dense_right_mat = self.solver_right_mat.todense()
-        dst_def_vts = inv_left_mat.solve(dense_right_mat).tolist()
+    def solve_problem(self, solver_right_mat: sps.csc_matrix) -> list:
+        dense_right_mat = solver_right_mat.todense()
+        dst_def_vts = self.inv_left_mat.solve(dense_right_mat).tolist()
         return dst_def_vts
 
     def construct_matrix_a(self, mode: str='crspd') -> sps.csc_matrix:
