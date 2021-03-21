@@ -23,6 +23,27 @@ optimization problem.
 ![deformation transfer](https://images.algorithmic.cn/GitHub/images/deformation_transfer_demo2.jpg)
 The topology of source & target mesh is different with each other.
 
+#### Usage
+- You can adjust the configurations in `./config.py` and see the arguments of each solver.
+
+- If you want to test on your own customized data, you need to first select the marker vertices on the two meshes with
+different topologies(it could be achieved quickly by using Maya or Blender)
+
+- After selecting the marker vertices, you need to do non-rigid registration for the mesh first, by running:
+```
+python non_rigid_registration.py
+```
+This part might take a pretty long time.
+
+- Then you need to find the correspondence of two mesh by executing:
+```
+python find_correspondence.py
+```
+
+- Finally, run:
+```
+python transfer_deformation.py
+```
 
 ##### Time consuming
 - non-rigid registration stage: about 20 minutes! Though it's pretty slow, we only need to calculate it for once if we
